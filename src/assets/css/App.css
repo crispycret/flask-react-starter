@@ -58,3 +58,35 @@
 @media screen and (width < 750px) {
   .main-sidebar {padding-left: 100px;}
 }
+
+
+
+#authentication {
+  padding-top: 100px;
+}
+
+
+.authentication-dark {
+  background-color: #282c34;
+  color: white;
+}
+
+#user-results {
+  padding-top: 50px;
+  padding-left: 150px;
+  padding-right: 250px;
+}
+
+#user-results table {
+  text-align: center;
+
+}
+#user-results table thead{
+  /* background-color: red; */
+}
+
+#user-results table tbody{
+  /* background-color: blue; */
+}
+
+

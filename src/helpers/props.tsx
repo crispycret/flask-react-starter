@@ -1,29 +1,68 @@
 import {
-    PropsInterface, NavbarPropsInterface, SidebarPropsInterface,
-    StylePropsInterface, DarkModePropsInterface,
-    AuthenticationPropsInterface, UserPropsInterface, 
+    PropsInterface, NavInterface, SidebarInterface,
+    StyleInterface, DarkModeInterface,
 } from 'helpers/PropInterfaces';
+
+
+
+import Auth from 'helpers/auth'
+import Users from 'helpers/users'
+
 
 
 
 export const Props = () => {
 
     return {
-        auth: AuthenticationProps(),
-        user: UserProps(),
-        nav: NavbarProps(),
-        style: StyleProps(),
+        auth: Auth(),
+        user: Users(),
+        nav: Nav(),
+        style: Style(),
     } as PropsInterface
 }
 
 
 
-export const  NavbarProps = () => {
-    const sidebar = SidebarProps()
-    return { sidebar } as NavbarPropsInterface
+
+
+
+
+
+export const  Nav = () => {
+    const sidebar = Sidebar()
+
+    
+    // Helps manages path traversal in functions
+    const history = require("history").createBrowserHistory();
+
+    // Navigate to a new path while tracking history.
+    function redirect(path: string) {
+        history.push(path);
+        let pathUrl = window.location.href;
+        window.location.href = path;
+    }
+
+
+
+    return { sidebar, history, redirect } as NavInterface
 };
 
-export const SidebarProps = () => {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export const Sidebar = () => {
     
     var isEnabled = false
     var sidebarId = 'sidebar'; // Have the sidebar set this value on mount or hardcode the sidebar id.S
@@ -55,12 +94,24 @@ export const SidebarProps = () => {
         enable,
         disable,
         toggle
-    } as SidebarPropsInterface
+    } as SidebarInterface
 }
 
 
 
-export const StyleProps = () => {
+
+
+
+
+
+
+
+
+
+
+
+
+export const Style = () => {
     var darkMode = DarkMode()
     
     const toggleClassById = (id: string, className: string) => {
@@ -73,8 +124,14 @@ export const StyleProps = () => {
     return {
         darkMode,
         toggleClassById
-    } as StylePropsInterface
+    } as StyleInterface
 }
+
+
+
+
+
+
 
 
 
@@ -125,7 +182,7 @@ export const DarkMode = () => {
         toggle,
         enable,
         disable
-    } as DarkModePropsInterface
+    } as DarkModeInterface
 }
 
 
@@ -133,34 +190,16 @@ export const DarkMode = () => {
 
 
 
-export const AuthenticationProps = () => {
-    var token = null
-
-    const login = () => {
-
-    }
-
-    const logout = () => {
-
-    }
-
-    const register = () => {
-
-    }
-
-    return {
-        token,
-        register,
-        login,
-        logout
-    } as AuthenticationPropsInterface
-} 
 
 
 
 
 
-export const UserProps = () => {
 
-    return {} as UserPropsInterface
-}
+
+
+
+
+
+
+

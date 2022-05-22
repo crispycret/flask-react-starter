@@ -3,20 +3,21 @@
 
 
 export interface PropsInterface {
-    nav: NavbarPropsInterface,
-    style: StylePropsInterface
-    auth: AuthenticationPropsInterface,
-    user: UserPropsInterface,
+    nav: NavInterface,
+    style: StyleInterface
+    auth: AuthInterface,
+    user: UserInterface,
 }
 
 
-export interface NavbarPropsInterface {
-    sidebar: SidebarPropsInterface
-    history: any
+export interface NavInterface {
+    sidebar: SidebarInterface,
+    history: any,
+    redirect: (path:string) => void
 }
 
 
-export interface SidebarPropsInterface {
+export interface SidebarInterface {
     isEnabled: boolean,
     sidebarId: string,
     enabledClassName: string,
@@ -27,14 +28,13 @@ export interface SidebarPropsInterface {
 
 
 
-export interface StylePropsInterface {
-    darkMode: DarkModePropsInterface,
+export interface StyleInterface {
+    darkMode: DarkModeInterface,
     toggleClassById: (id:string, className:string) => void 
-
 }
 
 
-export interface DarkModePropsInterface {
+export interface DarkModeInterface {
     isEnabled: boolean,
     elements: Array<string[]>,
     toggle: () => void,
@@ -45,16 +45,38 @@ export interface DarkModePropsInterface {
 
 
 
-export interface AuthenticationPropsInterface {
-    token: string|null,
-    register: () => void,
-    login: () => void,
-    logout: () => void
+export interface AuthInterface {
+    token: TokenInterface,
+    register: (
+        email: string, username: string, password: string,
+        successCallback?: (response: any) => void,
+        errorCallback?: (error: any) => void
+    ) => void,
+    login: (
+        email:string, password:string,
+        successCallback?: (response: any) => void,
+        errorCallback?: (error: any) => void,
+    ) => void,
+    logout: (
+        successCallback?: (response: any) => void,
+        errorCallback?: (error: any) => void
+    ) => void
+}
+
+export interface TokenInterface {
+    value: string|null,
+    set: (token: string) => void,
+    save: () => void,
+    remove: () => void,
+    has: () => boolean,
+    isValid: () => boolean,
 }
 
 
-export interface UserPropsInterface {
 
+export interface UserInterface {
+    users: object,
+    fetchAllUsers: () => Promise<any>,
 }
 
 

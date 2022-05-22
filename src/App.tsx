@@ -1,8 +1,6 @@
 import React, {useEffect} from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
-// import { useHistory } from "react-router-dom";
-
 import './assets/css/App.css';
 
 import {Props} from './helpers/props'
@@ -21,12 +19,11 @@ import NoPage from './pages/NoPage';
 
 function App() {
 
+
   const props = Props()
-  // props.nav.history = useHistory();
 
 
   useEffect(() =>{
-  // props.nav.history = useHistory();
 
   }, [])
 
@@ -42,7 +39,7 @@ function App() {
             <Route path='/login' element={<Authentication {...props} />} />
             <Route path='/register' element={<Authentication  {...props} />} />
             <Route path='/logout' element={<Logout {...props} />} />
-            <Route path='/users/' element={<UserList {...props} />} />
+            <Route path='/users' element={<UserList {...props} />} />
             <Route path='*' element={<NoPage {...props} />} />
           </Routes>
         </BrowserRouter>

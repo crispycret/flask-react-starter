@@ -43,13 +43,25 @@ export const Navbar = (props: PropsInterface) => {
                 }
             </div>
 
-            <div>Users</div>
-            <div>Engine</div>
-            <div>Engine</div> 
-            <div><i className="fa-solid fa-circle-half-stroke"></i></div>
-            <div><i className="fa-solid fa-circle-half-stroke fa-swap-opacity" onClick={toggleDarkMode}></i></div>
+            <div onClick={() => props.nav.redirect('/')}>Home</div>
+            <div onClick={() => props.nav.redirect('/users')}>Users</div>
+            <div onClick={() => props.nav.redirect('/users')}>Engine</div> 
 
-           
+
+            <section className='topbar-right'>
+                <>
+                    <div><i className="fa-solid fa-circle-half-stroke fa-lg" onClick={toggleDarkMode}/></div>
+                </>
+
+                {/* {props.auth.token.has() && props.auth.token.isValid() &&  */}
+                { true && 
+                    <>
+                        <div><button type="button" className="btn btn-secondary btn-md">register</button></div>                    
+                        <div><button type="button" className="btn btn-secondary btn-md">login</button></div>
+                    </>
+                }
+            </section>
+        
         </div>
 
         <Sidebar {...props} />

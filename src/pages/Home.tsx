@@ -23,7 +23,10 @@ export const Home = (props: PropsInterface) => {
           using <code>react</code> as the frontend and <code>flask</code> as the backend.
         </p>
 
-        <button type="button" className="btn btn-primary btn-lg">Getting Started</button>
+        <button type="button" className="btn btn-primary btn-lg" 
+          onClick={() =>
+            props.nav.redirect('/login')
+        }> Getting Started</button>
       
       </header>
     </div>
