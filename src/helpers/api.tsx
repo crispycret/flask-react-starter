@@ -1,32 +1,26 @@
 import axios, {AxiosPromise} from 'axios'
-import { PathMatch } from 'react-router-dom'
-
-export const _api = () => {
-
-    var base_url = ''
-
-    const fetchUrl = () => {
-        fetch('http://raw.githubusercontent.com/crispycret/flask-starter/main/.HOST')
-        .then(response => response.text())
-        .then(text => {
-            base_url = text
-        })
-    }
-    fetchUrl();
 
 
-    function request (method: string, path:string, data={}) {
-        console.log(base_url + path)
-        return axios({
-            method,
+
+// export const _api = () => {
+export const api = () => {
+
+    var base_url = 'http://localhost:5000'
+
+
+    function request (method: string, path:string, headers={}, data={}) {
+        const config = {
+            method: method,
             url: base_url + path,
-            data
-        })
+            headers: headers,
+            data: data
+        }
+        return axios(config) as AxiosPromise<any>
     }
+
 
     return {
         base_url,
-        fetchUrl,
         request,
     } as ApiInterface;
 }
@@ -36,11 +30,20 @@ export const _api = () => {
 
 export interface ApiInterface {
     base_url: string,
-    fetchUrl: () => void,
-    request: (method: string, path: string, data?: object) => AxiosPromise<any>
+    request: (method: string, path: string, headers?: object, data?: object) => AxiosPromise<any>
 }
 
 
 
-export const api = _api();
-export default api;
+// export const api = _api();
+export default api();
+
+
+
+
+
+
+
+
+
+

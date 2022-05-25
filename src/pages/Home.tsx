@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import logo from 'assets/images/logo.svg';
 
-import {PropsInterface} from 'helpers/PropInterfaces';
+import {PropsInterface} from 'helpers/interfaces';
 
 export const Home = (props: PropsInterface) => {
 

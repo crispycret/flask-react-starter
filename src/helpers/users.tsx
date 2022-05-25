@@ -1,8 +1,9 @@
 import axios from 'axios'
 
-import {UserInterface} from 'helpers/PropInterfaces'
+import {UserInterface} from 'helpers/interfaces'
 
 import api from 'helpers/api'
+
 
 export const Users = () => {
 

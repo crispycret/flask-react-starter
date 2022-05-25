@@ -61,8 +61,16 @@
 
 
 
+
+
+
+
 #authentication {
   padding-top: 100px;
+}
+
+#authentication .register {
+  padding-top: 50px;
 }
 
 
@@ -71,10 +79,30 @@
   color: white;
 }
 
+
+
+
+
+
+
+
 #user-results {
   padding-top: 50px;
   padding-left: 150px;
   padding-right: 250px;
+  min-height: 100vh;
+  color: #0000;
+  background-color: #ffff;
+}
+
+#user-results.dark {
+  background-color: #282c34;
+  
+  color: #ffff;
+}
+
+#user-results.dark table {
+  color: #ffff;
 }
 
 #user-results table {
@@ -87,6 +115,15 @@
 
 #user-results table tbody{
   /* background-color: blue; */
+}
+
+
+
+
+
+
+#pills-login .active {
+
 }
 
 

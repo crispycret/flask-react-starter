@@ -1,5 +1,5 @@
 
-import {PropsInterface} from 'helpers/PropInterfaces';
+import {PropsInterface} from 'helpers/interfaces';
 
 
 export const UserList = (props: PropsInterface) => {

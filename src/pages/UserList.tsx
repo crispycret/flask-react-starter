@@ -1,6 +1,6 @@
 
 import {useState, useEffect} from 'react'
-import {PropsInterface} from 'helpers/PropInterfaces';
+import {PropsInterface} from 'helpers/interfaces';
 
 
 export interface UserInterface { 
@@ -18,6 +18,10 @@ export const UserList = (props: PropsInterface) => {
 
     // Fetch User list on component load
     useEffect(() => {
+
+        props.style.darkMode.elements.push(['user-results', 'dark'])
+        props.style.darkMode.elements.push(['user-results-table', 'table-dark'])
+
         props.user.users = users
         props.user.fetchAllUsers()
         .then(_users => {
@@ -25,19 +29,20 @@ export const UserList = (props: PropsInterface) => {
         }).catch((error) => {
             console.log(error)
         })
-    }, [])
+    }, [props.auth.user])
 
 
     return (
         <div id="user-results">
 
+            <div style={{paddingTop: '25px'}}></div>
             <h2 className="text-center">User List</h2>
             
             <div>
-
                 {/* <p>{props.auth.token}</p> */}
+                <p>{JSON.stringify(props.auth.user)}</p>
 
-            <table className="table">
+            <table id='user-results-table' className="table table-striped">
                 <thead>
                     <tr>
                     <th className="text-center" scope="col">#</th>

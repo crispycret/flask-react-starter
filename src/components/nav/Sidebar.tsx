@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from 'react';
 
-import {PropsInterface} from 'helpers/PropInterfaces';
+import {PropsInterface} from 'helpers/interfaces';
 
 import 'assets/css/sidebar.css'
 

@@ -1,7 +1,8 @@
+import {useState} from 'react'
 import {
     PropsInterface, NavInterface, SidebarInterface,
-    StyleInterface, DarkModeInterface,
-} from 'helpers/PropInterfaces';
+    StyleInterface, DarkModeInterface, ErrorsInterface,
+} from 'helpers/interfaces';
 
 
 
@@ -18,13 +19,25 @@ export const Props = () => {
         user: Users(),
         nav: Nav(),
         style: Style(),
+        errors: Errors(),
     } as PropsInterface
 }
 
 
 
 
+export const Errors = () => {
+    const [message, setMessage] = useState('')
+    
+    function has (){
+        return message !== '' && message !== null && message !== undefined
+    }
 
+    return {
+        message,
+        has,
+    } as ErrorsInterface
+}
 
 
 
