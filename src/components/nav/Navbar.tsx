@@ -51,7 +51,6 @@ export const Navbar = (props: PropsInterface) => {
 
             <div onClick={() => props.nav.redirect('/')}>Home</div>
             <div onClick={() => props.nav.redirect('/users')}>Users</div>
-            <div onClick={() => props.nav.redirect('/users')}>Engine</div> 
 
 
             <section className='topbar-right'>
@@ -62,15 +61,14 @@ export const Navbar = (props: PropsInterface) => {
                 <div>isValid: {JSON.stringify(props.auth.token.valid)}</div>
 
                 {props.auth.token.valid ?
-                <>
+                    <>
                         <div onClick={() => props.nav.redirect('/logout')}>
                             <button type="button" className="btn btn-secondary btn-md">logout</button>
                         </div>
                     </>
                     :
                     <>
-                        <div onClick={() => props.auth.token.setValid(!props.auth.token.valid)}>
-                        {/* <div onClick={() => props.nav.redirect('/register')}> */}
+                        <div onClick={() => props.nav.redirect('/register')}>
                             <button type="button" className="btn btn-secondary btn-md">register</button>
                         </div>                    
                         <div onClick={() => props.nav.redirect('/login')}>
@@ -82,7 +80,7 @@ export const Navbar = (props: PropsInterface) => {
         </div>
         
         { props.errors.has() && 
-            <div id='nav-errors' className=''>
+            <div id='topbar-errors' className=''>
                 <span>{props.errors.message}</span>
             </div>
         }

@@ -15,7 +15,7 @@ export const Users = () => {
             url: 'http://127.0.0.1:5000/users',
             data: {}
         }).then(response => {
-            users = response.data.data.users
+            users = response.data.users
             return users
         }).catch(error => {
             console.log(error)

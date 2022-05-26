@@ -133,8 +133,11 @@ export const LoginRegiseter = (props: PropsInterface) => {
 
     // Request back-end to login user after registration
     function handleRegisterSuccess(response: any) {
+        if(response.status_code === 401 || response.status_code === 500) {
+            return
+        }
         props.auth.login(
-            loginEmail, loginPassword, 
+            registerUsername, registerPassword, 
             handleLoginSuccess, handleLoginFailure
         );
     }
@@ -178,7 +181,6 @@ export const LoginRegiseter = (props: PropsInterface) => {
 
 
     function loadTabFromUrl() {
-        console.log(window.location.pathname)
         if (window.location.pathname === '/register') {
             switchTab()
         }
@@ -188,12 +190,10 @@ export const LoginRegiseter = (props: PropsInterface) => {
     useEffect(() => {
         props.style.darkMode.elements.push(['authentication', 'authentication-dark']);
 
-        // if (props.auth.token.valid === true) {
-        //     console.log('REDIRECTING')
-        //     props.nav.redirect('/')
-        // } else {
-        //     console.log('WRONG')
-        // }
+        if (props.auth.token.valid === true) {
+            props.nav.redirect('/')
+        } else {
+        }
 
         // Load correct tab based on url
         loadTabFromUrl();

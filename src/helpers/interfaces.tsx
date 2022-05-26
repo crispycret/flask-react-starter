@@ -64,17 +64,17 @@ export interface AuthInterface {
         email: string, username: string, password: string,
         successCallback?: (response: any) => void,
         errorCallback?: (error: any) => void
-    ) => void,
+    ) => AxiosPromise<any> | null,
     login: (
         email:string, password:string,
         successCallback?: (response: any) => void,
         errorCallback?: (error: any) => void,
-    ) => void,
+    ) => AxiosPromise<any> | null,
     logout: (
         successCallback?: (response: any) => void,
         errorCallback?: (error: any) => void
-    ) => void,
-    validate: () => void,
+    ) => AxiosPromise<any> | null,
+    validate: () => AxiosPromise<any> | null,
 }
 
 

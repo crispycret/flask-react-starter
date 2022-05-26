@@ -7,11 +7,15 @@ import {AuthInterface, TokenInterface} from 'helpers/interfaces';
 import api from 'helpers/api'
 
 
+import {Errors, ErrorsInterface} from 'helpers/errors'
+
 
 
 
 
 export const Auth = () => {
+
+    const errors = Errors()
 
     // Token manager to get, set, remove, check, validate access token
     const token = Token()
@@ -26,11 +30,13 @@ export const Auth = () => {
     function request(method: string, path:string, headers={}, data={}) {
 
         // Add the token to the headers
-        const _headers = {
-            ...headers, 'x-access-token': token.get(), 
-        }
+        let _headers = {...headers}
         
-        api.request(method, path, headers=_headers, data=data)
+        if (token.has()) {
+            _headers = {..._headers, 'x-access-token': token.get()}
+        }
+
+        let response = api.request(method, path, headers=_headers, data=data)
         .then(response => {
             if (response.status === 401) {
                 token.set('')
@@ -41,7 +47,7 @@ export const Auth = () => {
             return error
         })
 
-        return api.request(method, path, headers=_headers, data=data) as AxiosPromise<any>
+        return response
     }
 
 
@@ -53,20 +59,26 @@ export const Auth = () => {
         errorCallback = (error:any) => {}
     ) {
 
+        if (token.has()) {
+            token.remove()
+        }
+
         var encoded_value = window.btoa(email+':'+password)
 
         const headers = {
             'Authorization': 'Basic ' + encoded_value
         }
 
-        api.request('POST', '/login', headers)
+        request('POST', '/login', headers)
         .then((response) => {
             token.save(response.data.token)
-            setUser(response.data.data.user)
+            setUser(response.data.user)
             successCallback(response)
+            return response
         })
         .catch((error) => {
             errorCallback(error);
+            return error
         });
     }
 
@@ -77,21 +89,23 @@ export const Auth = () => {
     function logout(
         successCallback= (response: any) => {}, 
         errorCallback = (error:any) => {}
-    ): any {
+    ) {
 
         if (!token.has()) {
             token.remove()
-            return
+            return null
         };
 
         request('POST', '/logout')
         .then((response: any) => {
             token.remove()
             successCallback(response)
+            return response
 
         }).catch((error: any) => {
             token.remove()
             errorCallback(error);
+            return error
         })
     }
 
@@ -100,7 +114,11 @@ export const Auth = () => {
     function register(
         email:string, username:string, password:string,
         successCallback= (response: any) => {}, errorCallback = (error:any) => {}
-    ): any {
+    ) {
+
+        if (token.has()) {
+            return null
+        }
 
         const data = {
             email: email,
@@ -111,8 +129,10 @@ export const Auth = () => {
         request('POST', '/register', {}, data)
         .then((response: any) => {
             successCallback(response)
+            return response
         }).catch((error: any) => {
             errorCallback(error);
+            return error
         })
     }
 
@@ -123,17 +143,17 @@ export const Auth = () => {
     function validate () {
         if (!token.has()) {
             token.remove()
-            return
+            return null
         }
 
         request('POST', '/token/validate')
         .then((response) => {
             token.save(response.data.token)
-            token.setValid(response.data.data.isValid)
+            token.setValid(response.data.isValid)
             return response
         }).catch((error) => {
             // set auth.status to 401 and set auth.message to response message
-            if (error.response.status === 401) {
+            if (error.response && error.response.status === 401) {
                 token.remove()
             }
             return error
