@@ -38,6 +38,9 @@ export const Auth = () => {
 
         let response = api.request(method, path, headers=_headers, data=data)
         .then(response => {
+
+            // [NOTE] Should this be here or in the catch below?
+            // [NOTE] Test and resolve if necessary.
             if (response.status === 401) {
                 token.set('')
                 token.setValid(false)
