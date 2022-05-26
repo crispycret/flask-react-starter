@@ -2,9 +2,9 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-### See the [README.md](https://github.com/crispycret/flask-react-starter/tree/main/backend) of the backend section regarding the flask application that serves as the data and control center of the frontend application.
+#### See the [README.md](https://github.com/crispycret/flask-react-starter/tree/main/backend) of the backend section regarding the flask application that serves as the data and control center of the frontend application.
 
-### Using default react README.md until documentation is written.
+Using default react README.md until documentation is written.
 
 ## Available Scripts
 
