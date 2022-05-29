@@ -3,8 +3,10 @@
 import axios, {AxiosPromise} from 'axios';
 import { useState } from 'react'
 
-import {AuthInterface, TokenInterface} from 'helpers/interfaces';
+import {AuthInterface, TokenInterface, UserModel} from 'helpers/interfaces';
+
 import api from 'helpers/api'
+import {User} from 'helpers/user'
 
 
 import {Errors, ErrorsInterface} from 'helpers/errors'
@@ -20,8 +22,7 @@ export const Auth = () => {
     // Token manager to get, set, remove, check, validate access token
     const token = Token()
 
-    const [user, setUser] = useState({})
-
+    const user = User()
 
     /*
         Make a request to the backend server while backing the access token in the request.
@@ -75,7 +76,7 @@ export const Auth = () => {
         request('POST', '/login', headers)
         .then((response) => {
             token.save(response.data.token)
-            setUser(response.data.user)
+            user.set(response.data.user as UserModel)
             successCallback(response)
             return response
         })
@@ -167,6 +168,7 @@ export const Auth = () => {
 
     return {
         token,
+        user,
         request,
         login,
         logout,

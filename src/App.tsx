@@ -15,6 +15,8 @@ import Footer from './components/nav/Footer';
 import Home from './pages/Home';
 import LoginRegiseter from './pages/LoginRegiseter';
 import UserList from './pages/UserList';
+import UserProfile from './pages/UserProfile';
+import UserProfile1 from './pages/UserProfile1';
 import NoPage from './pages/NoPage';
 
 
@@ -43,6 +45,8 @@ function App() {
             <Route path='/register' element={<LoginRegiseter  {...props} />} />
             <Route path='/logout' element={<Logout {...props} />} />
             <Route path='/users' element={<UserList {...props} />} />
+            <Route path='/users/:username' element={<UserProfile {...props} />} />
+            <Route path='/users/1/:username' element={<UserProfile1 {...props} />} />
             <Route path='*' element={<NoPage {...props} />} />
           </Routes>
         </BrowserRouter>
