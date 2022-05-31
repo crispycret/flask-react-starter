@@ -21,7 +21,15 @@ Backend:
 
 In the project directory, you can run the following commands after installation:
 
+<<<<<<< HEAD
 ### `npm install`
+=======
+#### See the [README.md](https://github.com/crispycret/flask-react-starter/tree/main/backend) of the backend section regarding the flask application that serves as the data and control center of the frontend application.
+
+Using default react README.md until documentation is written.
+
+## Available Scripts
+>>>>>>> origin
 
 This will install the required frontend dependencies.
 
