@@ -1,7 +1,7 @@
 import {useState} from 'react'
 
 import api from 'helpers/api'
-import {UserInterface, UserModel, UserProfileInterface, UserProfileModel} from 'helpers/interfaces'
+import {UserInterface, UserProfileInterface} from 'helpers/interfaces'
 import { AxiosPromise } from 'axios'
 
 export const User = () => {
@@ -11,7 +11,7 @@ export const User = () => {
 
     const profile = UserProfile()
 
-    function set(user: UserModel) {
+    function set(user: any) {
         setUsername(user.username)
         setEmail(user.email)
         return 
@@ -53,7 +53,7 @@ export const UserProfile = (): UserProfileInterface => {
     const [followers, setFollowers] = useState(Array<object>())
     const [following, setFollowing] = useState(Array<object>())
 
-    function set(data: UserProfileModel) {
+    function set(data: any) {
         setBio(data.bio)
         setFollowers(data.followers)
         setFollowing(data.following)
@@ -66,20 +66,15 @@ export const UserProfile = (): UserProfileInterface => {
             console.log(error)
             return error
         })
-
-        console.log("Getting")
+        set(response.data)
 
         // If the users profile is not yet created, create it.
         if (response.data.profile === null) {
-            console.log('creating profile')
             response = await api.request('POST', `/users/${username}/profile/create`)
             .catch(error =>{
                 console.log(error)
                 return error
             })
-
-            console.log("CREATED")
-            console.log(response)
 
             // After creating the profile, make another request to get profile information.
             response = await api.request('GET', `/users/${username}/profile`)
@@ -87,13 +82,9 @@ export const UserProfile = (): UserProfileInterface => {
                 console.log(error)
                 return error
             })
-
-            console.log("Getting")
-            console.log(response)
+            set(response.data)
         }
 
-        console.log(response.data)
-        set(response.data.profile)
         return response
     }
 

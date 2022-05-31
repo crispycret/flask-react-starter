@@ -94,10 +94,9 @@ export interface TokenInterface {
 
 
 export interface UsersInterface {
-    users: Array<UserModel>,
+    users: Array<UserInterface>,
     setUsers: (users: Array<object>) => void,
     selectedUser: UserInterface,
-    setSelectedUser: (user: UserInterface) => void,
     fetchAllUsers: () => AxiosPromise<any> | null
 }
 
@@ -106,40 +105,27 @@ export interface UsersInterface {
 
 
 export interface UserInterface {
-    set: (user: UserModel) => void
+    set: (user: any) => void
     fetch: (username: string) => AxiosPromise<any>
     username: string, 
     setUsername: (value: string) => void, 
     email: string, 
     setEmail: (value: string) => void,
     profile: UserProfileInterface,
+    setProfile: (profile: UserProfileInterface) => void,
 }
-
-
-export interface UserModel {
-    username: string, 
-    email: string,
-    profile: UserProfileInterface
-}
-
 
 
 export interface UserProfileInterface {
-    set: (data: UserProfileModel) => void,
+    set: (data: any) => void,
     fetch: (username: string) => AxiosPromise<any>,
     bio: string, 
     setBio: (value: string) => void,
-    followers: object, 
+    followers: Array<object>,
     setFollowers: (value: object) => void,
-    following: object, 
+    following: Array<object>, 
     setFollowing: (value: object) => void,
 
-}
-
-export interface UserProfileModel {
-    bio: string,
-    followers: Array<object>,
-    following: Array<object>,
 }
 
 

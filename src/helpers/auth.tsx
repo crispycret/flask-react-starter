@@ -3,7 +3,7 @@
 import axios, {AxiosPromise} from 'axios';
 import { useState } from 'react'
 
-import {AuthInterface, TokenInterface, UserModel} from 'helpers/interfaces';
+import {AuthInterface, TokenInterface} from 'helpers/interfaces';
 
 import api from 'helpers/api'
 import {User} from 'helpers/user'
@@ -18,10 +18,7 @@ import {Errors, ErrorsInterface} from 'helpers/errors'
 export const Auth = () => {
 
     const errors = Errors()
-
-    // Token manager to get, set, remove, check, validate access token
     const token = Token()
-
     const user = User()
 
     /*
@@ -76,7 +73,7 @@ export const Auth = () => {
         request('POST', '/login', headers)
         .then((response) => {
             token.save(response.data.token)
-            user.set(response.data.user as UserModel)
+            user.set(response.data.user)
             successCallback(response)
             return response
         })

@@ -4,14 +4,13 @@ import axios, {AxiosPromise} from 'axios'
 import api from 'helpers/api'
 import User from 'helpers/user'
 
-import {UsersInterface, UserModel} from 'helpers/interfaces'
+import {UsersInterface} from 'helpers/interfaces'
 
 
 export const Users = () => {
 
     const [users, setUsers] = useState(new Array<object>());
-    
-    const [selectedUser, setSelectedUser] = useState(User());
+    const selectedUser = User();
 
 
     const fetchAllUsers = async () => {
@@ -20,18 +19,17 @@ export const Users = () => {
             return error
         })
         setUsers(response.data.users)
-        console.log(response.data.users)
         return response
     }
 
     
     const fetchUser = async (username: string) => {
-
         let response = await selectedUser.fetch(username)
         .catch(error => {
             console.log(error)
             return error
         })
+        selectedUser.set(response.data)
         return response
     }
 
@@ -39,7 +37,6 @@ export const Users = () => {
         users,
         setUsers,
         selectedUser,
-        setSelectedUser,
         fetchUser,
         fetchAllUsers,
     } as UsersInterface;
