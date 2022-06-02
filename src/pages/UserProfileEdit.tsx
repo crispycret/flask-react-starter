@@ -3,10 +3,8 @@ import {useParams} from 'react-router-dom'
 
 import {PropsInterface} from 'helpers/interfaces';
 
-import {UserProfile1} from 'pages/UserProfile1';
 
-
-export const UserProfile = (props: PropsInterface) => {
+export const UserProfileEdit = (props: PropsInterface) => {
 
     // CURRENT TO DO.
     // AFTER IMPLEMENT FOLLOW AND BLOCKING AND UPDATE THIS PAGE.
@@ -16,50 +14,13 @@ export const UserProfile = (props: PropsInterface) => {
 
     // const [username, setUsername] = useState('')
 
-    const params = useParams()
-    
-    const [user, setUser] = useState({}) 
-    const [canEdit, setCanEdit] = useState(false)
-
-    
-    // async function fetchUser() {
-    async function fetchUser() {
-        if (params.username === undefined){ 
-            // Display to the user that the username is returned no user
-            console.log('No username')
-            return
-        }
-
-        let res = await props.users.selectedUser.fetch(params.username)
-        let _user = res?.data.user
-        setUser(_user)
-
-        // Check if the current user is the same as the selected user
-        console.log(params.username)
-        if (props.auth.user.username === params.username)
-        {
-            // Allow fields to be changed
-            setCanEdit(true)
-        }
-        else {
-            setCanEdit(false)
-            // Draw Display UserProfile
-        }
-
-
-    }
-
 
     useEffect(() => {
 
-        fetchUser()
-       
     }, [])
 
 
     return (
-        <>
-        <UserProfile1 {...props } />
         <div id='user-profile'>
 
             <div id='user-profile-tag'>
@@ -73,7 +34,7 @@ export const UserProfile = (props: PropsInterface) => {
                     <div className="col-md-3 border-right">
                         <div className="d-flex flex-column align-items-center text-center p-3 py-5">
                             <img className="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"/>
-                            <span className="font-weight-bold">{params.username ? params.username : 'null'}</span><span className="text-black-50">{props.users.selectedUser.email}</span><span> </span>
+                            {/* <span className="font-weight-bold">{username}</span><span className="text-black-50">{props.users.selectedUser.email}</span><span> </span> */}
                         </div>
                     </div>
                     <div className="col-md-5 border-right">
@@ -124,10 +85,9 @@ export const UserProfile = (props: PropsInterface) => {
                 </div>
             </div>
         </div>
-        </>
     )
 }
 
 
 
-export default UserProfile;
+export default UserProfileEdit;

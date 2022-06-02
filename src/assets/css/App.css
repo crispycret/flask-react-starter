@@ -46,6 +46,7 @@
 
 
 #main {
+  margin-top: 50px;
   transition: 0.5s; /* 0.5s transition effect to slide in the sidenav*/
 }
 
@@ -127,3 +128,17 @@
 }
 
 
+
+
+#user-profile {
+  width: 100%;
+  height:300px;
+  color: black;
+  padding-top: 50px;
+}
+
+#user-profile-tag {
+  top: 250px;
+  height:100px;
+  color: black;
+}
