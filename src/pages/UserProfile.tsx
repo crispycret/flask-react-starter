@@ -25,6 +25,7 @@ export const UserProfile = (props: PropsInterface) => {
     // async function fetchUser() {
     async function fetchUser() {
         if (params.username === undefined){ 
+            // Display to the user that the username is returned no user
             console.log('No username')
             return
         }

@@ -24,6 +24,7 @@ export const User = () => {
             console.log(error)
             return error
         })
+        
         set(response.data.user)
 
         response = await profile.fetch(username)
@@ -97,3 +98,27 @@ export const UserProfile = (): UserProfileInterface => {
     } as UserProfileInterface
 
 }
+
+
+
+export const UserSocialLinks = () => {
+
+    const [twitter, setTwitter] = useState(null)
+    const [facebook, setFacebook] = useState(null)
+    const [instagram, setInstagram] = useState(null)
+
+    return {
+        twitter,
+        facebook,
+        instagram,
+    } as UserSocialLinksInterface
+}
+
+
+export interface UserSocialLinksInterface {
+    twitter: string | null,
+    facebook: string | null,
+    instagram: string | null,
+}
+
+
