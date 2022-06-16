@@ -1,4 +1,4 @@
-import uuid
+import uuid, json
 import secrets
 
 from flask import request
@@ -101,6 +101,11 @@ def login_user():
     
     # Create an access token for the user using their public_id.
     token_data = auth_utils.create_token_data(user.public_id)
+    
+    print(token_data)
+    print(json.dumps(token_data))
+    
+    # token = auth_utils.encode_token_data(token_data)
     token = auth_utils.encode_token_data(token_data)
     
     # Return the token

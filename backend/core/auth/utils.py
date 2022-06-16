@@ -21,6 +21,7 @@ def create_token_data(public_id):
 
 def encode_token_data(token_data):
     """ Encode token data with the SECRET_KEY HS256 SHA256 """
+    print("Encode: " + Configuration.SECRET_KEY)
     return jwt.encode(token_data, Configuration.SECRET_KEY, 'HS256')
     
     
